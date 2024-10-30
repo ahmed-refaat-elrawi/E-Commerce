@@ -8,16 +8,8 @@ import { cartContext } from "../../Context/CartContext"; // Ensure the CartConte
 import toast from 'react-hot-toast';
 
 // Define the shape of the product object
-interface ProductType {
-  _id: string;
-  imageCover: string;
-  title: string;
-  category: {
-    name: string;
-  };
-  price: number;
-  ratingsAverage: number;
-}
+
+
 
 function FeaturedProducts() {
   const cart = useContext(cartContext);
@@ -30,7 +22,7 @@ function FeaturedProducts() {
   const { addToCart } = cart;
 
   // Function to add a product to the cart
-  async function addProduct(productId: number) {
+  async function addProduct(productId) {
     try {
       const response = await addToCart(productId);
       if (response.status === "success") {
@@ -68,7 +60,7 @@ function FeaturedProducts() {
     <div className="py-2">
       <h2>Featured Products</h2>
       <div className="row gy-4">
-        {data?.data.data.map((product: ProductType) => (
+        {data?.data.data.map((product) => (
           <Product key={product._id} product={product} />
         ))}
       </div>
@@ -76,7 +68,7 @@ function FeaturedProducts() {
   );
 
   // Component to render individual product
-  function Product({ product }: { product: ProductType }) {
+  function Product({ product }) {
     return (
       <div className="col-md-3">
         <div className={`product overflow-hidden cursor-pointer p-2 ${Style.product}`}>
